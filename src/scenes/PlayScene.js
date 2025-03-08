@@ -15,7 +15,7 @@ class PlayScene extends Phaser.Scene {
         this.pipeVerticalDistantRange = [150, 250];
         this.pipeHorizontalDistanceRange = [450, 500];
 
-        this.flapVelocity = 250;
+        this.flapVelocity = 300;
     }
 
     preload() {
@@ -43,7 +43,7 @@ class PlayScene extends Phaser.Scene {
 
     createBird() {
         this.bird = this.physics.add.sprite(this.config.startPosition.x, this.config.startPosition.y, 'bird').setOrigin(0);
-        this.bird.body.gravity.y = 400;
+        this.bird.body.gravity.y = 600;
         this.bird.setCollideWorldBounds(true);
     }
 
