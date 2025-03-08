@@ -1,4 +1,5 @@
 import Phaser from "phaser";
+import { debug } from "webpack";
 
 const config = {
   // WebGL (Web graphics library) JS API for rendering 2D and 3D graphics
@@ -7,31 +8,44 @@ const config = {
   height: 600,
   physics: {
     // Arcade physics plugin, manages physics simulation
-    default: 'arcade'
+    default: 'arcade',
+    arcade: {
+      gravity: { y: 400 },
+      debug: true
+    }
   },
   scene: {
     preload,
-    create
+    create,
+    update
   }
 }
 
-// Loading assets, such as images, music, animations ...
 function preload() {
-  // 'this' context - scene
-  // contains functions and properties we can use
   this.load.image('sky', 'assets/sky.png');
   this.load.image('bird', 'assets/bird.png');
 }
 
+const VELOCITY = 200;
+
 let bird = null;
+let flapVelocity = 250;
+let totalDelta = null;
 
 function create() {
-  // x - 400
-  // y - 300
-  // key of the image
   this.add.image(0, 0, 'sky').setOrigin(0);
-  // middle of the height, 1/10 width
-  bird = this.add.sprite(config.width / 10, config.height / 2, 'bird').setOrigin(0);
+  bird = this.physics.add.sprite(config.width / 10, config.height / 2, 'bird').setOrigin(0);
+
+  this.input.on('pointerdown', flap);
+  this.input.keyboard.on('keydown-SPACE', flap);
+}
+
+function update(time, delta) {
+
+}
+
+function flap() {
+  bird.body.velocity.y = -flapVelocity;
 }
 
 new Phaser.Game(config);
