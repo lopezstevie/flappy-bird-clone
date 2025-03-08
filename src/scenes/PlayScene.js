@@ -32,10 +32,7 @@ class PlayScene extends Phaser.Scene {
     }
 
     update() {
-        if (this.bird.y < -this.bird.height || this.bird.y > this.config.height) {
-            this.restartBirdPosition();
-        }
-        
+        this.checkGameStatus();
         this.recyclePipes();
     }
 
@@ -64,6 +61,12 @@ class PlayScene extends Phaser.Scene {
     initializeInputs() {
         this.input.on('pointerdown', this.flap, this);
         this.input.keyboard.on('keydown-SPACE', this.flap, this);
+    }
+
+    checkGameStatus() {
+        if (this.bird.y < -this.bird.height || this.bird.y > this.config.height) {
+            this.restartBirdPosition();
+        }
     }
 
     placePipe(uPipe, lPipe) {
