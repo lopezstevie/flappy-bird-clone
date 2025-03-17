@@ -12,6 +12,9 @@ class BaseScene extends Phaser.Scene {
     }
 
     create() {
+        this.game.canvas.setAttribute('tabindex', '0');
+        this.game.canvas.focus();
+
         this.add.image(0, 0, 'sky').setOrigin(0);
 
         if (this.config.canGoBack) {

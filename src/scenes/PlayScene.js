@@ -144,6 +144,7 @@ class PlayScene extends BaseScene {
     initializeInputs() {
         this.input.on('pointerdown', this.flap, this);
         this.input.keyboard.on('keydown-SPACE', this.flap, this);
+        this.input.keyboard.addCapture(Phaser.Input.Keyboard.KeyCodes.SPACE);
     }
 
     checkGameStatus() {
